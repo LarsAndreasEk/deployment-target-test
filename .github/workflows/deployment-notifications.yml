@@ -1,7 +1,7 @@
 name: Notify the team on deployments
 
 on:
-    deployment_status:
+    [deployment_status]
 
 
 jobs:
