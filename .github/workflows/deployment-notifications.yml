@@ -1,0 +1,22 @@
+name: Notify the team on deployments
+
+on:
+    deployment_status:
+
+
+jobs:
+    notify:
+        runs-on: [ubuntu-latest]
+        steps:
+            - name: Pending
+              if: github.event.deployment_status.state == 'pending'
+              run: echo pending
+            - name: InProcess
+              if: github.event.deployment_status.state == 'in_progress'
+              run: echo in_progress
+            - name: Success
+              if: github.event.deployment_status.state == 'success'
+              run: echo success
+            - name: Failure
+              if: github.event.deployment_status.state == 'failure'
+              run: echo failure
