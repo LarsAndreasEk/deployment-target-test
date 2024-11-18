@@ -8,6 +8,8 @@ jobs:
     notify:
         runs-on: [ubuntu-latest]
         steps:
+            - name: Write stuff
+              run: echo OK
             - name: Pending
               if: github.event.deployment_status.state == 'pending'
               run: echo pending
