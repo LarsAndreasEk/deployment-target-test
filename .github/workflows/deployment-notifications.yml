@@ -1,26 +1,30 @@
 name: Notify the team on deployments
 
 on:
-    workflow_dispatch: 
     deployment_status: 
-    
-
 
 jobs:
-    notify:
+    Pending:
         runs-on: [ubuntu-latest]
+        if: github.event.deployment_status.state == 'pending'
         steps:
-            - name: Write stuff
-              run: echo OK
-            - name: Pending
-              if: github.event.deployment_status.state == 'pending'
+            - name: Notify
               run: echo pending
-            - name: InProcess
-              if: github.event.deployment_status.state == 'in_progress'
+    InProcess:
+        runs-on: [ubuntu-latest]
+        if: github.event.deployment_status.state == 'in_progress'
+        steps:
+            - name: Notify
               run: echo in_progress
-            - name: Success
-              if: github.event.deployment_status.state == 'success'
+    Success:
+        runs-on: [ubuntu-latest]
+        if: github.event.deployment_status.state == 'success'
+        steps:
+            - name: Notify
               run: echo success
-            - name: Failure
-              if: github.event.deployment_status.state == 'failure'
+    Failure:
+        runs-on: [ubuntu-latest]
+        if: github.event.deployment_status.state == 'failure'
+        steps:
+            - name: Notify
               run: echo failure
